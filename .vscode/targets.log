@@ -1,6 +1,4 @@
 make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make.exe: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-w64-mingw32
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make.exe: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jul 29 18:13:48 2022
+# Make data base, printed on Fri Jul 29 20:43:25 2022
 
 # Variables
 
@@ -46,8 +44,8 @@ ONEDRIVE = C:\Users\youss\OneDrive\Documents\OneDrive
 PUBLIC = C:\Users\Public
 # environment
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
-# makefile
-MAKEFILE_LIST := 
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
 # environment
 TMP = C:\Users\youss\AppData\Local\Temp
 # environment
@@ -119,7 +117,7 @@ MAKECMDGOALS := all
 # default
 MAKE_VERSION := 4.2.1
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := all
 # environment
 PROGRAMFILES(X86) = C:\Program Files (x86)
 # automatic
@@ -193,7 +191,8 @@ VSCODE_PID = 11968
 # environment
 USERDOMAIN_ROAMINGPROFILE = PC
 # variable set hash-table stats:
-# Load=90/1024=9%, Rehash=0, Collisions=16/108=15%
+# Load=90/1024=9%, Rehash=0, C 
+ollisions=16/114=14%
 
 # Pattern-specific Variable Values
 
@@ -201,9 +200,9 @@ USERDOMAIN_ROAMINGPROFILE = PC
 
 # Directories
 
-# . (key c:/Users/youss/Bureau/info/raycaster2.0, mtime 1659114827): 8 files, no impossibilities.
+# . (key c:/Users/youss/Bureau/info/raycaster2.0, mtime 1659123787): 9 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -211,33 +210,61 @@ USERDOMAIN_ROAMINGPROFILE = PC
 
 # Files
 
-# Not a target:
-all:
+link:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 7):
+	g++ raycasting_in_c++/main/main.o raycasting_in_c++/src/utilities.o -o raycasting_in_c++/main -LC:/Users/youss/Documents/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
+
+all: compile link
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-29 20:36:57
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
-# Not a target:
-makefile:
-#  Implicit rule search has been done.
+compile:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
 #  File does not exist.
 #  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-makefile.mak:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := compile
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  recipe to execute (from 'Makefile', line 4):
+	g++ raycasting_in_c++/main/main.cpp raycasting_in_c++/src/utilities.cpp -c -IC:/Users/youss/Documents/SFML-2.5.1/include -IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_in_c++
 
 # Not a target:
 .DEFAULT:
@@ -245,27 +272,20 @@ makefile.mak:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-GNUmakefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
 # files hash-table stats:
-# Load=7/1024=1%, Rehash=0, Collisions=0/16=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/22=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 15 / storage = 132 B / avg = 8 B
-# current buf: size = 8162 B / used = 132 B / count = 15 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 14 / storage = 114 B / avg = 8 B
+# current buf: size = 8162 B / used = 114 B / count = 14 / avg = 8 B
 
-# strcache performance: lookups = 17 / hit rate = 11%
+# strcache performance: lookups = 24 / hit rate = 41%
 # hash-table stats:
-# Load=15/8192=0%, Rehash=0, Collisions=1/17=6%
-# Finished Make data base on Fri Jul 29 18:13:48 2022
+# Load=14/8192=0%, Rehash=0, Collisions=1/24=4%
+# Finished Make data base on Fri Jul 29 20:43:25 2022
 
  
