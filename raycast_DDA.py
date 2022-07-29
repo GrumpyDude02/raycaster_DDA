@@ -1,4 +1,4 @@
-from dis import dis
+import numba
 import pygame,sys,math
 from pygame.math import Vector2 as vc
 
@@ -10,6 +10,7 @@ cell_number=20
 width=cell_size*cell_number
 height=cell_size*cell_number
 clock=pygame.time.Clock()
+
 
 main_surface=pygame.display.set_mode((width,height))
 
@@ -69,7 +70,7 @@ class Player():
         casted_rays=120
         start_angle=self.angle-self.fov
         for rays in range(casted_rays):
-            ray_direction=vc((math.sin(start_angle))*cell_size,(math.cos(start_angle))*cell_size)
+            ray_direction=vc((math.sin(start_angle)*cell_size),(math.cos(start_angle))*cell_size)
             g_ray=ray(ray_direction,self.pos)
             dst0=g_ray.cast_ray(map)
             pygame.draw.line(main_surface,(0,255,0),self.pos,self.pos+g_ray.dir*dst0)
