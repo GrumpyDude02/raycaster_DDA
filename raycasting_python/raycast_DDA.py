@@ -60,7 +60,7 @@ class Player():
         self.pos=vc(pos[0]*cell_size,pos[0]*cell_size)
         self.angle=math.pi/6
         self.fov=self.angle/2
-        self.dir=vc((math.sin(self.angle))*cell_size,(math.cos(self.angle))*cell_size)
+        self.dir=vc((math.sin(self.angle)),(math.cos(self.angle)))
         self.step=math.pi/240
         
     def draw_player(self,map):
