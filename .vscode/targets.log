@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jul 30 16:19:19 2022
+# Make data base, printed on Sun Jul 31 16:32:20 2022
 
 # Variables
 
@@ -37,7 +37,8 @@ SHELL := sh.exe
 # environment
 WINDIR = C:\Windows
 # environment
-VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"8e1a08857df44efaeace20a1f4372f40.fr","_translationsConfigFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\tcf.json","_cacheRoot":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr","_resolvedLanguagePackCoreLocation":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\3b889b090b5ad5793f524b5d1d39fda662b96a2a","_corruptedFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"8e1a08857df44efaeace20a1f4372f40.fr","_translationsConfigFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\tcf.json","_cacheRoot":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr","_resolvedLanguagePackCoreLocation":"C:\\Users\\y 
+ouss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\3b889b090b5ad5793f524b5d1d39fda662b96a2a","_corruptedFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\corrupted.info","_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\youss\OneDrive\Documents\OneDrive
 # environment
@@ -47,13 +48,15 @@ PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
+# environment
 TMP = C:\Users\youss\AppData\Local\Temp
 # environment
 PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_CWD = C:\Users\youss\Bureau
+VSCODE_CWD = C:\Users\youss\AppData\Local\Programs\Microsoft VS Code
 # default
 MAKE_HOST := x86_64-w64-mingw32
 # environment
@@ -77,7 +80,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_11488_KATYQDWTDGRWUIGF
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_10508_ILLJOQLXDTBTMEQP
 # environment
 COMPUTERNAME = PC
 # environment
@@ -185,13 +188,15 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
 WSA_PACMAN_HOME = C:\Program Files\WSA PacMan
 # environment
-VSCODE_PID = 11488
+VSCODE_PID = 10508
 # environment
 USERDOMAIN_ROAMINGPROFILE = PC
 # variable set hash-table stats:
-# Load=90/1024=9%, Rehash=0, Collisions=16/114=14%
+# Load=92/1024=9%, Rehash=0, Collisions=16/116=14%
 
 # Pattern-specific Variable Values
 
@@ -286,6 +291,6 @@ compile:
 # strcache performance: lookups = 24 / hit rate = 41%
 # hash-table stats:
 # Load=14/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Sat Jul 30 16:19:19 2022
+# Finished Make data base on Sun Jul 31 16:32:20 2022
 
  
