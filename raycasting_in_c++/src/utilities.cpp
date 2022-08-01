@@ -48,8 +48,11 @@ bool collision(sf::CircleShape& circle,sf::RectangleShape& rect,float rect_width
 
 void cir_rect_collision(sf::CircleShape& circle,sf::RectangleShape& rect,float circle_radius,float rw,float rh){
 
-    float nearestX=std::max(rect.getPosition().x,std::min(circle.getPosition().x+circle_radius,rect.getPosition().x+rw));
-    float nearestY=std::max(rect.getPosition().y,std::min(circle.getPosition().y+circle_radius,rect.getPosition().y+rh));
+
+    float nearestX=circle.getPosition().x+circle_radius;
+    float nearestY=circle.getPosition().y+circle_radius;
+    nearestX=std::clamp(nearestX,rect.getPosition().x,rect.getPosition().x+rw);
+    nearestY=std::clamp(nearestY,rect.getPosition().y,rect.getPosition().y+rh);
 
     sf::Vector2f nearestV(circle.getPosition().x+circle_radius-nearestX,circle.getPosition().y+circle_radius-nearestY);
     float dist=sqrt((nearestV.x*nearestV.x)+(nearestV.y*nearestV.y));

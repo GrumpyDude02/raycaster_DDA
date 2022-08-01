@@ -1,4 +1,3 @@
-import numba
 import pygame,sys,math
 from pygame.math import Vector2 as vc
 
@@ -21,80 +20,114 @@ class ray:
         
     def cast_ray(self,map):
         ray_start=[self.pos.x,self.pos.y]
-        ray_step_unit=vc(math.sqrt(1+(self.dir.y/self.dir.x)*(self.dir.y/self.dir.x)),math.sqrt(1+(self.dir.x/self.dir.y)*(self.dir.x/self.dir.y)))
+        ray_step_unit=vc()
         map_cell=[int(ray_start[0]),int(ray_start[1])]
         Ray_length=vc(0,0)
         
         if (self.dir.y<0):
             step_y=-1
+            ray_step_unit.y=step_y/self.dir.y
             Ray_length.y=(ray_start[1]-float(map_cell[1]))*ray_step_unit.y
         else :
             step_y=1
+            ray_step_unit.y=step_y/self.dir.y
             Ray_length.y=(-ray_start[1]+float(map_cell[1]+1))*ray_step_unit.y
         
         if (self.dir.x<0):
             step_x=-1
+            ray_step_unit.x=step_x/self.dir.x
             Ray_length.x=(ray_start[0]-float(map_cell[0]))*ray_step_unit.x
         else :
             step_x=1
+            ray_step_unit.x=step_x/self.dir.x
             Ray_length.x=(-ray_start[0]+float(map_cell[0]+1))*ray_step_unit.x
             
         tilefound=False
         distance=0  
-        max_distance=20
+        max_distance=10
         while (not tilefound and distance<max_distance):
             if Ray_length.y<Ray_length.x:
                 map_cell[1]+=step_y
-                distance=Ray_length.y/cell_size
+                distance=Ray_length.y
                 Ray_length.y+=ray_step_unit.y
             else:
                 map_cell[0]+=step_x
-                distance=Ray_length.x/cell_size
+                distance=Ray_length.x
                 Ray_length.x+=ray_step_unit.x
             if map[(map_cell[1]//cell_size)][map_cell[0]//cell_size]==1:
                 break
         return distance
 
 class Player():
-    def __init__(self,pos):
+    def __init__(self,pos,casted_rays):
         self.pos=vc(pos[0]*cell_size,pos[0]*cell_size)
-        self.angle=math.pi/6
-        self.fov=self.angle/2
-        self.dir=vc((math.sin(self.angle)),(math.cos(self.angle)))
-        self.step=math.pi/240
+        self.angle=math.pi
+        self.fov=math.pi/2
+        self.step=self.fov/casted_rays
         
     def draw_player(self,map):
-        self.main_ray=ray(self.dir,self.pos)
-        dst=self.main_ray.cast_ray(map)
         pygame.draw.circle(main_surface,(255,0,0),self.pos,10)
         casted_rays=120
-        start_angle=self.angle-self.fov
+        start_angle=self.angle-self.fov/2
         for rays in range(casted_rays):
-            ray_direction=vc((math.sin(start_angle)*cell_size),(math.cos(start_angle))*cell_size)
-            g_ray=ray(ray_direction,self.pos)
-            dst0=g_ray.cast_ray(map)
-            pygame.draw.line(main_surface,(0,255,0),self.pos,self.pos+g_ray.dir*dst0)
-            start_angle+=self.step     
+            ray_start={'x':self.pos.x/cell_size,'y':self.pos.y/cell_size}
+            ray_step_unit=vc()
+            map_cell={'x':int(ray_start['x']),'y':int(ray_start['y']) }
+            Ray_length=vc(0,0)
+            cos_a,sin_a=math.cos(start_angle),math.sin(start_angle)
+            
+            if cos_a<0:
+                dx=-1
+                ray_step_unit.x=dx/cos_a
+                Ray_length.x=(ray_start['x']-map_cell['x'])*ray_step_unit.x
+            else:
+                dx=1
+                ray_step_unit.x=dx/cos_a
+                Ray_length.x=(-ray_start['x']+map_cell['x']+1)*ray_step_unit.x
+            if sin_a<0:
+                dy=-1
+                ray_step_unit.y=dy/sin_a
+                Ray_length.y=(ray_start['y']-map_cell['y'])*ray_step_unit.y
+            else:
+                dy=1
+                ray_step_unit.y=dy/sin_a
+                Ray_length.y=(-ray_start['y']+map_cell['y']+1)*ray_step_unit.y 
+            while True:
+                if Ray_length.x<Ray_length.y:
+                    map_cell['x']+=dx
+                    dist=Ray_length.x
+                    Ray_length.x+=ray_step_unit.x
+                else:
+                    map_cell['y']+=dy
+                    dist=Ray_length.y
+                    Ray_length.y+=ray_step_unit.y
+                if dist>=10:
+                    dist=10
+                    break
+                elif map_cell['x']>=0 and map_cell['x']<=len(map) and map_cell['y']>=0 and map_cell['y']<=len(map):
+                    if map[map_cell['y']][map_cell['x']]==1:
+                        break
+                else:
+                    break
+                
+            pygame.draw.line(main_surface,(0,255,0),self.pos,(self.pos.x+cos_a*dist*cell_size,self.pos.y+sin_a*dist*cell_size))
+            start_angle+=self.step
+                
+            
             
     def move_player(self,dt):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_UP]:
-            self.pos.y+=math.cos(self.angle)*50*dt
-            self.pos.x+=math.sin(self.angle)*50*dt
+            self.pos.y+=math.sin(self.angle)*50*dt
+            self.pos.x+=math.cos(self.angle)*50*dt
         if keys[pygame.K_DOWN]:
-            self.pos.y-=math.cos(self.angle)*50*dt
-            self.pos.x-=math.sin(self.angle)*50*dt
+            self.pos.y-=math.sin(self.angle)*50*dt
+            self.pos.x-=math.cos(self.angle)*50*dt
         if keys[pygame.K_RIGHT]:
-            self.angle-=5*dt
-        if keys[pygame.K_LEFT]:
             self.angle+=5*dt
-        self.dir=vc((math.sin(self.angle))*cell_size,(math.cos(self.angle))*cell_size)    
-        
-        
-        
-                
-            
-        
+        if keys[pygame.K_LEFT]:
+            self.angle-=5*dt   
+               
 
 map=[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
       [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -125,7 +158,7 @@ def everything(map):
                 square=pygame.Rect((j)*cell_size,(i)*cell_size,(cell_size)-1,cell_size-1)
                 pygame.draw.rect(main_surface,(WHITE),square)
             
-player1=Player((4,4)) 
+player1=Player((4,4),120) 
             
 def display_fps(clock,window):     
     font=pygame.font.Font(None,20)

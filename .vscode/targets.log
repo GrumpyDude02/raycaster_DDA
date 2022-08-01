@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jul 31 16:32:20 2022
+# Make data base, printed on Mon Aug 01 19:21:30 2022
 
 # Variables
 
@@ -37,8 +37,7 @@ SHELL := sh.exe
 # environment
 WINDIR = C:\Windows
 # environment
-VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"8e1a08857df44efaeace20a1f4372f40.fr","_translationsConfigFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\tcf.json","_cacheRoot":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr","_resolvedLanguagePackCoreLocation":"C:\\Users\\y 
-ouss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\3b889b090b5ad5793f524b5d1d39fda662b96a2a","_corruptedFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"8e1a08857df44efaeace20a1f4372f40.fr","_translationsConfigFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\tcf.json","_cacheRoot":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr","_resolvedLanguagePackCoreLocation":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\3b889b090b5ad5793f524b5d1d39fda662b96a2a","_corruptedFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\corrupted.info","_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\youss\OneDrive\Documents\OneDrive
 # environment
@@ -80,7 +79,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_10508_ILLJOQLXDTBTMEQP
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_13128_XGSFAUOCHIOVYEKH
 # environment
 COMPUTERNAME = PC
 # environment
@@ -192,7 +191,7 @@ FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
 WSA_PACMAN_HOME = C:\Program Files\WSA PacMan
 # environment
-VSCODE_PID = 10508
+VSCODE_PID = 13128
 # environment
 USERDOMAIN_ROAMINGPROFILE = PC
 # variable set hash-table stats:
@@ -291,6 +290,6 @@ compile:
 # strcache performance: lookups = 24 / hit rate = 41%
 # hash-table stats:
 # Load=14/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Sun Jul 31 16:32:20 2022
+# Finished Make data base on Mon Aug 01 19:21:30 2022
 
  
