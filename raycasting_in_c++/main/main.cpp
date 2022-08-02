@@ -83,7 +83,7 @@ class player{
         shape.setRadius(radius);
         shape.setPosition(pos.x,pos.y);
         shape.setFillColor(sf::Color(255,0,0));
-        dir=sf::Vector2f(float(std::sin((*angle))),float(std::cos((*angle))));
+        //dir=sf::Vector2f(float(std::cos((*angle))),float(std::sin((*angle))));
         step=(FOV/120);
     }
 
@@ -93,29 +93,72 @@ class player{
         screen.draw(shape);
 
         for(int i=0;i<=120;i++){
-            sf::Vector2f dir(float(std::sin((start_angle)))*cell_size,float(std::cos((start_angle)))*cell_size);
-            ray ray(dir,pos);
-            float distance=ray.cast_rays(map,radius);
-            float target_x=pos.x+radius+dir.x*distance;
-            float target_y=pos.y+radius+dir.y*distance;
-            sf::Vertex line[]={sf::Vector2f(pos.x+radius,pos.y+radius),sf::Vector2f(target_x,target_y)};
+            sf::Vector2f ray_start((pos.x+radius)/cell_size,(pos.y+radius)/cell_size);
+            sf::Vector2f unit_step_size,Ray_length;
+            int map_cell[]={int(ray_start.x),int(ray_start.y)};
+            int dx,dy;
+            float dist;
+            float cos_a=std::cos(start_angle);
+            float sin_a=std::sin(start_angle);
+
+            if (cos_a<0){
+                dx=-1;
+                unit_step_size.x=dx/cos_a;
+                Ray_length.x=(ray_start.x-float(map_cell[0]))*unit_step_size.x;
+            }else{
+                dx=1;
+                unit_step_size.x=dx/cos_a;
+                Ray_length.x=(float(map_cell[0]+1)-ray_start.x)*unit_step_size.x;
+            }
+            if (sin_a<0){
+                dy=-1;
+                unit_step_size.y=dy/sin_a;
+                Ray_length.y=(ray_start.y-float(map_cell[1]))*unit_step_size.y;
+            }else{
+                dy=1;
+                unit_step_size.y=dy/sin_a;
+                Ray_length.y=(float(map_cell[1]+1)-ray_start.y)*unit_step_size.y;
+            }
+            while(1){
+                if (Ray_length.x<Ray_length.y){
+                    map_cell[0]+=dx;
+                    dist=Ray_length.x;
+                    Ray_length.x+=unit_step_size.x;
+                }else{
+                    map_cell[1]+=dy;
+                    dist=Ray_length.y;
+                    Ray_length.y+=unit_step_size.y;
+                }
+                if (dist>=10){
+                    dist=10;
+                    break;
+                }
+                else if(map_cell[0]>=0 && map_cell[0]<=19 && map_cell[1]>=0 && map_cell[1]<=19){
+                    if(map[map_cell[1]][map_cell[0]]==1){
+                        break;
+                    }
+                }
+            }
+            sf::Vertex line[]={
+                sf::Vector2f(pos.x+radius,pos.y+radius),
+                sf::Vector2f(pos.x+radius+cos_a*dist*cell_size,pos.y+radius+sin_a*dist*cell_size)
+                };
             screen.draw(line,2,sf::Lines);
             start_angle+=step;
-
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-            *angle+=0.01f;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
             *angle-=0.01f;
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+            *angle+=0.01f;
+        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
-            shape.move(std::sin(*angle)*0.5f,std::cos(*angle));
+            shape.move(std::cos(*angle)*0.5f,std::sin(*angle));
             pos=shape.getPosition();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
-            shape.move(-std::sin(*angle)*0.5f,-std::cos(*angle));
+            shape.move(-std::cos(*angle)*0.5f,-std::sin(*angle));
             pos=shape.getPosition();
             
         }
@@ -126,7 +169,7 @@ class player{
 
 int main(){
     sf::RenderWindow window(sf::VideoMode(600,600),"test");
-    window.setFramerateLimit(60);
+    //window.setFramerateLimit(60);
     sf::Clock clock;
 
     for(int i=0;i<20;i++){

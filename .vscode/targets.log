@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Aug 01 19:21:30 2022
+# Make data base, printed on Tue Aug 02 22:00:45 2022
 
 # Variables
 
@@ -46,7 +46,8 @@ PUBLIC = C:\Users\Public
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# environment
+#  
+environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
 TMP = C:\Users\youss\AppData\Local\Temp
@@ -55,7 +56,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_CWD = C:\Users\youss\AppData\Local\Programs\Microsoft VS Code
+VSCODE_CWD = C:\Users\youss\Bureau
 # default
 MAKE_HOST := x86_64-w64-mingw32
 # environment
@@ -79,7 +80,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_13128_XGSFAUOCHIOVYEKH
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7624_XVMFADLXZBQZNEPU
 # environment
 COMPUTERNAME = PC
 # environment
@@ -191,7 +192,7 @@ FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
 WSA_PACMAN_HOME = C:\Program Files\WSA PacMan
 # environment
-VSCODE_PID = 13128
+VSCODE_PID = 7624
 # environment
 USERDOMAIN_ROAMINGPROFILE = PC
 # variable set hash-table stats:
@@ -290,6 +291,6 @@ compile:
 # strcache performance: lookups = 24 / hit rate = 41%
 # hash-table stats:
 # Load=14/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Mon Aug 01 19:21:30 2022
+# Finished Make data base on Tue Aug 02 22:00:45 2022
 
  

@@ -5,7 +5,7 @@
 
 void print_fps(sf::Clock& clock,double* dt){
     *dt=clock.restart().asSeconds();
-    std::cout<<1.f/(*dt)<<std::endl;
+    std::cout<<int(1.f/(*dt))<<std::endl;
 }
 
 bool collision(sf::CircleShape& circle,sf::RectangleShape& rect,float rect_width){
