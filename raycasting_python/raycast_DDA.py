@@ -172,7 +172,7 @@ while True:
     player1.move(dt)
     player1.update(map,main_surface)
     draw_minimap(map,player1,casted_rays)
-    clock.tick(60)
+    clock.tick()
     fps=clock.get_fps()
     display_fps(clock,main_surface)
     pygame.display.flip()
