@@ -1,4 +1,3 @@
-from numpy import rec
 import pygame,sys,math
 from collisions import circle_rect_collisions,mouse_control,clamp
 from pygame.math import Vector2 as vc
@@ -6,6 +5,7 @@ from pygame.math import Vector2 as vc
 pygame.init()
 GREY=(84,84,84)
 WHITE=(255,255,255)
+PI=math.pi
 
 #RESOLUTION_VARIABLES
 cell_size=30
@@ -33,8 +33,8 @@ class raycaster():
     def __init__(self,pos,casted_rays):
         self.pos=vc(pos[0]*cell_size,pos[0]*cell_size)
         self.casted_rays=casted_rays
-        self.angle=math.pi
-        self.fov=1.39626
+        self.angle=PI
+        self.fov=PI/2
         self.step=self.fov/casted_rays
         self.scale=width//casted_rays
         self.sc_distance=half_width/math.tan(self.fov/2)
@@ -42,7 +42,7 @@ class raycaster():
     def cast_rays(self,map,surface):
         #pygame.draw.circle(main_surface,(255,0,0),self.pos,10)
         start_angle=self.angle-self.fov/2
-        for rays in range(self.casted_rays):
+        for rays in range(1,self.casted_rays+1):
             ray_start={'x':self.pos.x/cell_size,'y':self.pos.y/cell_size}
             ray_step_unit=vc()
             map_cell={'x':int(ray_start['x']),'y':int(ray_start['y']) }
@@ -51,19 +51,19 @@ class raycaster():
             
             if cos_a<0:
                 dx=-1
-                ray_step_unit.x=dx/cos_a
+                ray_step_unit.x=dx/(cos_a)
                 Ray_length.x=(ray_start['x']-map_cell['x'])*ray_step_unit.x
             else:
                 dx=1
-                ray_step_unit.x=dx/cos_a
+                ray_step_unit.x=dx/(cos_a)
                 Ray_length.x=(-ray_start['x']+map_cell['x']+1)*ray_step_unit.x
             if sin_a<0:
                 dy=-1
-                ray_step_unit.y=dy/sin_a
+                ray_step_unit.y=dy/(sin_a)
                 Ray_length.y=(ray_start['y']-map_cell['y'])*ray_step_unit.y
             else:
                 dy=1
-                ray_step_unit.y=dy/sin_a
+                ray_step_unit.y=dy/(sin_a)
                 Ray_length.y=(-ray_start['y']+map_cell['y']+1)*ray_step_unit.y 
             while True:
                 if Ray_length.x<Ray_length.y:
@@ -88,7 +88,8 @@ class raycaster():
             c=1+dist*dist*0.02
             color=(255/c,255/c,255/c)
             pygame.draw.rect(surface,color,(rays*self.scale,half_height-projected_height//2+offset[0],self.scale,projected_height))
-            start_angle+=self.step
+            start_angle=math.atan(((self.scale*rays-half_width)/self.sc_distance))+self.angle
+            #start_angle+=self.step
                 
             
             
@@ -124,7 +125,8 @@ class raycaster():
         if switch:
             visibility=False
             mouse_control(self,BORDERS,center,50,0.35,dt,offset)
-       
+        if self.angle>=2*PI:
+            self.angle=0.01
               
 
 
@@ -155,7 +157,7 @@ def draw_minimap(map,player):
     pygame.draw.rect(main_surface,(0,0,0),(0,0,len(map)*10,len(map)*10))
     map_pos={'x':(player.pos.x/cell_size)*10,'y':(player.pos.y/cell_size)*10}
     pygame.draw.circle(main_surface,(255,0,0),(map_pos['x'],map_pos['y']),2)
-    for ray in range(len(ray_coordonates)):
+    for ray in range(0,len(ray_coordonates),4):
         pygame.draw.line(main_surface,(0,255,0),(map_pos['x'],map_pos['y']),(map_pos['x']+ray_coordonates[ray]['x'],map_pos['y']+ray_coordonates[ray]['y']))
     ray_coordonates=[]
     
@@ -186,10 +188,12 @@ def display_fps(clock,window):
     pygame.draw.rect(window,(0,0,0),rect)
     window.blit(fps,(1050,40))
 
+
 import time    
 previous_time=time.time()
 toggle=True
 visibility=False
+max_dt=0.066
 
     
 while True:
@@ -201,6 +205,8 @@ while True:
             toggle=not toggle
             visibility=True
     dt=time.time()-previous_time
+    if dt>=0.066:
+        dt=0.066
     previous_time=time.time()
     main_surface.fill((0,0,0))
     pygame.draw.rect(main_surface,(0,150,255),sky)
@@ -210,7 +216,7 @@ while True:
     player1.update(dt,toggle)
     player1.cast_rays(map,main_surface)
     draw_minimap(map,player1)
-    clock.tick()
+    clock.tick(60)
     fps=clock.get_fps()
     display_fps(clock,main_surface)
     pygame.display.flip()
