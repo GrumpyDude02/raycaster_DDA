@@ -25,7 +25,22 @@ def circle_rect_collisions(circle,rect,circle_radius,rect_width,rect_height,appl
                 dir=pygame.Vector2(nearestV.x/dist,nearestV.y/dist)
                 circle.x+=dir.x*overlap
                 circle.y+=dir.y*overlap
-    
+
+
+def clamp(minimum,maximum,val):
+    val=max(minimum,min(val,maximum))
+    return val
+
+def mouse_control(player,borders,center,max_relativity,sensitivity,dt,offset):
+    mx,my=pygame.mouse.get_pos()
+    if mx<borders[0] or mx>borders[1] or my<100 or my>500:
+        pygame.mouse.set_pos(center)
+    rel,rel_y=pygame.mouse.get_rel()
+    rel=clamp(-max_relativity,max_relativity,rel)
+    rel_y=clamp(-max_relativity,max_relativity,rel_y)
+    player.angle+=rel*sensitivity*dt
+    offset[0]-=rel_y*dt*sensitivity*100
+
 
 def SAT_collision():
     pass

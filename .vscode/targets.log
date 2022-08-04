@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Aug 03 14:25:31 2022
+# Make data base, printed on Thu Aug 04 13:02:18 2022
 
 # Variables
 
@@ -79,7 +79,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7624_XVMFADLXZBQZNEPU
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_13060_FBUHFTPKOYSTBPJJ
 # environment
 COMPUTERNAME = PC
 # environment
@@ -99,7 +99,7 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 VSCODE_CODE_CACHE_PATH = C:\Users\youss\AppData\Roaming\Code\CachedData\3b889b090b5ad5793f524b5d1d39fda662b96a2a
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 COMMONPROGRAMFILES = C:\Program Files\Common Files
 # environment
@@ -141,6 +141,7 @@ OS = Windows_NT
 # environment
 VSCODE_IPC_HOOK = \\.\pipe\f4fd9a2d056ad18d49db8a1bc8d46714-1.69.2-main-sock
 # environment
+ 
 HOMEPATH = \Users\youss
 # environment
 COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
@@ -191,9 +192,8 @@ FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
 WSA_PACMAN_HOME = C:\Program Files\WSA PacMan
 # environment
-VSCODE_PID = 7624
-# envir 
-onment
+VSCODE_PID = 13060
+# environment
 USERDOMAIN_ROAMINGPROFILE = PC
 # variable set hash-table stats:
 # Load=92/1024=9%, Rehash=0, Collisions=16/116=14%
@@ -293,6 +293,6 @@ compile:
 # strcache performance: lookups = 24 / hit rate = 41%
 # hash-table stats:
 # Load=14/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Wed Aug 03 14:25:31 2022
+# Finished Make data base on Thu Aug 04 13:02:18 2022
 
  

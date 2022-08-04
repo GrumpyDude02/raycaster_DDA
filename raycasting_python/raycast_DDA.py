@@ -1,5 +1,6 @@
+from numpy import rec
 import pygame,sys,math
-from collisions import circle_rect_collisions
+from collisions import circle_rect_collisions,mouse_control,clamp
 from pygame.math import Vector2 as vc
 
 pygame.init()
@@ -17,9 +18,15 @@ half_height=height//2
 casted_rays=width//2
 ray_coordonates=[]
 clock=pygame.time.Clock()
+BORDERS =(100,width-100,100,height-100)
+offset=[0]
+center=(half_width,half_height)
+
 
 #DISPLAY_SURFACE
 main_surface=pygame.display.set_mode((width,height))
+sky=pygame.Rect(0,0,1200,300)
+floor=pygame.Rect(0,300,1200,300)
 
 
 class raycaster():
@@ -27,12 +34,12 @@ class raycaster():
         self.pos=vc(pos[0]*cell_size,pos[0]*cell_size)
         self.casted_rays=casted_rays
         self.angle=math.pi
-        self.fov=math.pi/2
+        self.fov=1.39626
         self.step=self.fov/casted_rays
         self.scale=width//casted_rays
         self.sc_distance=half_width/math.tan(self.fov/2)
         
-    def update(self,map,surface):
+    def cast_rays(self,map,surface):
         #pygame.draw.circle(main_surface,(255,0,0),self.pos,10)
         start_angle=self.angle-self.fov/2
         for rays in range(self.casted_rays):
@@ -80,24 +87,46 @@ class raycaster():
             projected_height=self.sc_distance/(dist+0.0001)
             c=1+dist*dist*0.02
             color=(255/c,255/c,255/c)
-            pygame.draw.rect(surface,color,(rays*self.scale,half_height-projected_height//2,self.scale,projected_height))
+            pygame.draw.rect(surface,color,(rays*self.scale,half_height-projected_height//2+offset[0],self.scale,projected_height))
             start_angle+=self.step
                 
             
             
-    def move(self,dt):
+    def update(self,dt,switch):
+        global offset,visibility
+        speed=50
         keys=pygame.key.get_pressed()
+        vel_v=vc()
+        vel_h=vc()
+        if keys[pygame.K_z]:
+            vel_v.y=math.sin(self.angle)
+            vel_v.x=math.cos(self.angle)
+        if keys[pygame.K_s]:
+            vel_v.y=-math.sin(self.angle)
+            vel_v.x=-math.cos(self.angle)
+        if keys[pygame.K_d]:
+            vel_h.y=math.sin(self.angle+math.pi/2)
+            vel_h.x=math.cos(self.angle+math.pi/2)
+        if keys[pygame.K_q]:
+            vel_h.y=math.sin(self.angle-math.pi/2)
+            vel_h.x=math.cos(self.angle-math.pi/2)
         if keys[pygame.K_UP]:
-            self.pos.y+=math.sin(self.angle)*50*dt
-            self.pos.x+=math.cos(self.angle)*50*dt
+            offset[0]+=50*dt
         if keys[pygame.K_DOWN]:
-            self.pos.y-=math.sin(self.angle)*50*dt
-            self.pos.x-=math.cos(self.angle)*50*dt
-        if keys[pygame.K_RIGHT]:
-            self.angle+=5*dt
-        if keys[pygame.K_LEFT]:
-            self.angle-=5*dt   
-               
+            offset[0]-=50*dt
+        
+        dir=vc((vel_v.x+vel_h.x),(vel_v.y+vel_h.y))
+        norm=math.sqrt((vel_v.x+vel_h.x)*(vel_v.x+vel_h.x)+(vel_v.y+vel_h.y)*(vel_v.y+vel_h.y))
+        if norm!=0:
+            dir=vc(((vel_v.x+vel_h.x)/norm),((vel_v.y+vel_h.y)/norm))
+        self.pos+=dir*dt*speed
+        pygame.mouse.set_visible(visibility)
+        if switch:
+            visibility=False
+            mouse_control(self,BORDERS,center,50,0.35,dt,offset)
+       
+              
+
 
 map=[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
       [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -121,7 +150,7 @@ map=[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
       [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
       ]
 
-def draw_minimap(map,player,casted_rays):
+def draw_minimap(map,player):
     global ray_coordonates
     pygame.draw.rect(main_surface,(0,0,0),(0,0,len(map)*10,len(map)*10))
     map_pos={'x':(player.pos.x/cell_size)*10,'y':(player.pos.y/cell_size)*10}
@@ -150,28 +179,37 @@ player1=raycaster((4,4),casted_rays)
             
 def display_fps(clock,window):     
     font=pygame.font.Font(None,20)
-    fps=font.render(str(int(clock.get_fps())),True,(255,255,255))
-    window.blit(fps,(1150,40))
-    
+    fps=font.render("FPS:"+str(int(clock.get_fps())),True,(255,255,255))
+    rect=fps.get_rect()
+    rect.x=1050
+    rect.y=40
+    pygame.draw.rect(window,(0,0,0),rect)
+    window.blit(fps,(1050,40))
 
 import time    
 previous_time=time.time()
-sky=pygame.Rect(0,0,1200,300)
-floor=pygame.Rect(0,300,1200,300)
+toggle=True
+visibility=False
 
     
 while True:
     event=pygame.event.poll()
     if event.type==pygame.QUIT:
         sys.exit()
+    if event.type==pygame.KEYDOWN:
+        if event.key==pygame.K_ESCAPE:
+            toggle=not toggle
+            visibility=True
     dt=time.time()-previous_time
     previous_time=time.time()
     main_surface.fill((0,0,0))
     pygame.draw.rect(main_surface,(0,150,255),sky)
     pygame.draw.rect(main_surface,(100,100,100),floor)
-    player1.move(dt)
-    player1.update(map,main_surface)
-    draw_minimap(map,player1,casted_rays)
+    sky=pygame.Rect(0,0,1200,300+offset[0])
+    floor=pygame.Rect(0,300+offset[0],1200,300-offset[0])
+    player1.update(dt,toggle)
+    player1.cast_rays(map,main_surface)
+    draw_minimap(map,player1)
     clock.tick()
     fps=clock.get_fps()
     display_fps(clock,main_surface)
