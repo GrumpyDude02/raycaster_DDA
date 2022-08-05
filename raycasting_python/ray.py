@@ -1,5 +1,6 @@
-import pygame
 from pygame.math import Vector2 as vc
+
+#ray calss to cast a single ray
 
 class ray:
     def __init__(self,direction,start_pos) :

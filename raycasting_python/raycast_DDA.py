@@ -1,32 +1,13 @@
 import pygame,sys,math
-from collisions import circle_rect_collisions,mouse_control,clamp
+from settings import *
+from texture_loader import texture_list
+from collisions import circle_rect_collisions,mouse_control
 from pygame.math import Vector2 as vc
 
 pygame.init()
-GREY=(84,84,84)
-WHITE=(255,255,255)
-PI=math.pi
-
-#RESOLUTION_VARIABLES
-cell_size=30
-cell_number=20
-h_cell_number=40
-width=cell_size*h_cell_number
-half_width=width//2
-height=cell_size*cell_number
-half_height=height//2
-casted_rays=width//2
-ray_coordonates=[]
-clock=pygame.time.Clock()
-BORDERS =(100,width-100,100,height-100)
-offset=[0]
-center=(half_width,half_height)
 
 
-#DISPLAY_SURFACE
-main_surface=pygame.display.set_mode((width,height))
-sky=pygame.Rect(0,0,1200,300)
-floor=pygame.Rect(0,300,1200,300)
+objects=[]
 
 
 class raycaster():
@@ -40,6 +21,8 @@ class raycaster():
         self.sc_distance=half_width/math.tan(self.fov/2)
         
     def cast_rays(self,map,surface):
+        global objects,ray_coordonates
+        objects=[]
         #pygame.draw.circle(main_surface,(255,0,0),self.pos,10)
         start_angle=self.angle-self.fov/2
         for rays in range(1,self.casted_rays+1):
@@ -69,29 +52,25 @@ class raycaster():
                 if Ray_length.x<Ray_length.y:
                     map_cell['x']+=dx
                     dist=Ray_length.x
+                    hor=True
                     Ray_length.x+=ray_step_unit.x
                 else:
                     map_cell['y']+=dy
+                    hor=False
                     dist=Ray_length.y
                     Ray_length.y+=ray_step_unit.y
-                if dist>=15:
-                    dist=15
-                    break
-                elif map_cell['x']>=0 and map_cell['x']<len(map) and map_cell['y']>=0 and map_cell['y']<len(map):
-                    if map[map_cell['y']][map_cell['x']]==1:
+                if map_cell['x']>=0 and map_cell['x']<len(map) and map_cell['y']>=0 and map_cell['y']<len(map):
+                    if map[map_cell['y']][map_cell['x']]!=0:
+                        displacement=(ray_start['y']+sin_a*dist)%1 if hor==True else (ray_start['x']+cos_a*dist)%1
                         break
                 else:
                     break
             ray_coordonates.append({'x':cos_a*dist*10,'y':sin_a*dist*10})
             dist*=math.cos(start_angle-self.angle)
             projected_height=self.sc_distance/(dist+0.0001)
-            c=1+dist*dist*0.02
-            color=(255/c,255/c,255/c)
-            pygame.draw.rect(surface,color,(rays*self.scale,half_height-projected_height//2+offset[0],self.scale,projected_height))
+            objects.append((projected_height,displacement,map[map_cell['y']][map_cell['x']]))
             start_angle=math.atan(((self.scale*rays-half_width)/self.sc_distance))+self.angle
             #start_angle+=self.step
-                
-            
             
     def update(self,dt,switch):
         global offset,visibility
@@ -130,22 +109,22 @@ class raycaster():
               
 
 
-map=[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+map=[[1,1,1,1,1,1,1,1,1,3,1,1,1,1,1,1,1,1,1,1],
       [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-      [1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1],
-      [1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1],
+      [1,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,1],
       [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
       [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
       [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-      [1,0,0,0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,1],
-      [1,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,1],
-      [1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
-      [1,0,0,1,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,1],
-      [1,0,0,1,0,1,0,0,1,1,1,0,0,0,0,0,0,0,0,1],
-      [1,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,1],
-      [1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-      [1,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
-      [1,0,0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1],
+      [1,0,0,0,0,2,0,0,0,0,0,2,2,2,2,0,0,0,0,1],
+      [1,0,0,0,0,2,2,0,0,0,0,0,0,0,2,0,0,0,0,1],
+      [1,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,1],
+      [1,0,0,2,0,2,0,0,1,1,0,0,0,0,0,0,0,0,0,1],
+      [1,0,0,2,0,2,0,0,1,1,1,0,0,0,0,0,0,0,0,1],
+      [1,0,0,0,0,2,0,0,1,1,0,0,0,0,0,0,0,0,0,1],
+      [1,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,0,0,0,2,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,0,0,0,2,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1],
       [1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
       [1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
       [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -170,7 +149,7 @@ def draw_minimap(map,player):
     
     for i in range(len(map)):
         for j in range(len(map[0])):
-            if map[i][j]==1:
+            if map[i][j]!=0:
                 square=pygame.Rect((j)*cell_size,(i)*cell_size,(cell_size)-1,cell_size-1)
                 if square.x>=starting_cell_x*cell_size and square.x<=ending_cell_x*cell_size and square.y>=starting_cell_y*cell_size and square.y<=ending_cell_y*cell_size:
                     circle_rect_collisions(player.pos,square,10,cell_size,cell_size,True)
@@ -188,6 +167,19 @@ def display_fps(clock,window):
     pygame.draw.rect(window,(0,0,0),rect)
     window.blit(fps,(1050,40))
 
+def render_walls(list):
+    for objects in list:
+        texture_offset=objects[1]
+        projected_height=objects[0]
+        texture_index=objects[2]
+        texture=texture_list[str(texture_index)]
+        #if projected_height<height:
+        wall_column=texture.subsurface(texture_offset*(256-player1.scale),0,player1.scale,256)
+        wall_column=pygame.transform.scale(wall_column,(player1.scale,projected_height))
+        index=list.index(objects)
+        column_pos=(player1.scale*index,half_height-projected_height//2+offset[0])
+       
+        main_surface.blit(wall_column,column_pos)
 
 import time    
 previous_time=time.time()
@@ -196,7 +188,7 @@ visibility=False
 max_dt=0.066
 
     
-while True:
+while(1):
     event=pygame.event.poll()
     if event.type==pygame.QUIT:
         sys.exit()
@@ -209,14 +201,15 @@ while True:
         dt=0.066
     previous_time=time.time()
     main_surface.fill((0,0,0))
-    pygame.draw.rect(main_surface,(0,150,255),sky)
-    pygame.draw.rect(main_surface,(100,100,100),floor)
     sky=pygame.Rect(0,0,1200,300+offset[0])
     floor=pygame.Rect(0,300+offset[0],1200,300-offset[0])
+    pygame.draw.rect(main_surface,GREY,sky)
+    pygame.draw.rect(main_surface,DARKER_GREY,floor)
     player1.update(dt,toggle)
     player1.cast_rays(map,main_surface)
+    render_walls(objects)
     draw_minimap(map,player1)
-    clock.tick(60)
+    clock.tick()
     fps=clock.get_fps()
     display_fps(clock,main_surface)
     pygame.display.flip()
