@@ -23,7 +23,6 @@ class raycaster():
     def cast_rays(self,map,surface):
         global objects,ray_coordonates
         objects=[]
-        #pygame.draw.circle(main_surface,(255,0,0),self.pos,10)
         start_angle=self.angle-self.fov/2
         for rays in range(1,self.casted_rays+1):
             ray_start={'x':self.pos.x/cell_size,'y':self.pos.y/cell_size}
