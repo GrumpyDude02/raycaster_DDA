@@ -1,6 +1,6 @@
 #pragma once
-#ifndef utilities
-#define utilities
+#ifndef tools
+#define tools
 #include<SFML/Graphics.hpp>
 
 void print_fps(sf::Clock& clock,double* dt);

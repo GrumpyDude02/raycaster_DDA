@@ -1,7 +1,7 @@
 import pygame,sys
 from settings import *
 from texture_loader import texture_list
-from utilities import circle_rect_collisions,display_fps
+from stuff import circle_rect_collisions,display_fps
 from raycaster import raycaster
 
 pygame.init()
@@ -92,7 +92,7 @@ while(1):
     floor=pygame.Rect(0,300+offset[0],1200,300-offset[0])
     pygame.draw.rect(main_surface,GREY,sky)
     pygame.draw.rect(main_surface,DARKER_GREY,floor)
-    camera.update(dt,toggle,offset,True)
+    camera.update(dt,toggle,offset,False)
     objects,ray_coordonates=camera.cast_rays(map,10)
     render_walls(objects)
     draw_minimap(map,camera,ray_coordonates)

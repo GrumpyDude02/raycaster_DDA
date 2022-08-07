@@ -1,7 +1,7 @@
 #include<SFML\Graphics.hpp>
 #include<iostream>
 #include<cmath>
-#include"header_files\utilities.hpp"
+#include"header_files\tools.hpp"
 
 void print_fps(sf::Clock& clock,double* dt){
     *dt=clock.restart().asSeconds();

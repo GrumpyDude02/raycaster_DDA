@@ -4,7 +4,7 @@
 #include<algorithm>
 #include<SFML/Graphics.hpp>
 
-#include"header_files/utilities.hpp"
+#include"header_files/tools.hpp"
 #include"header_files/raycaster.hpp"
 
 const int cell_size=30;

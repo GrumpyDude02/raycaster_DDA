@@ -1,7 +1,7 @@
 from pygame.math import Vector2 as vc
 from math import cos,sin,tan,atan,sqrt
 from settings import *
-from utilities import mouse_control
+from stuff import mouse_control
 
 #ray class to cast a single ray
 

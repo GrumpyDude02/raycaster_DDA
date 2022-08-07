@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Aug 07 23:26:08 2022
+# Make data base, printed on Mon Aug 08 00:52:00 2022
 
 # Variables
 
@@ -63,8 +63,7 @@ PATH = C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Windows\system32
 # environment
 COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # environment
-ZES_E 
-NABLE_SYSMAN = 1
+ZES_ENABLE_SYSMAN = 1
 # environment
 PROCESSOR_ARCHITECTURE = AMD64
 # environment
@@ -80,7 +79,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12608_JYVDMIGVIWGJXYUG
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_15680_HQUXRABLFQWEGGWM
 # environment
 COMPUTERNAME = PC
 # environment
@@ -162,7 +161,8 @@ APPDATA = C:\Users\youss\AppData\Roaming
 # environment
 TEMP = C:\Users\youss\AppData\Local\Temp
 # environment
-COMSPEC = C:\Windows\system32\cmd.exe
+COMSPEC =  
+C:\Windows\system32\cmd.exe
 # default
 MAKEFILES := 
 # automatic
@@ -192,7 +192,7 @@ FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
 WSA_PACMAN_HOME = C:\Program Files\WSA PacMan
 # environment
-VSCODE_PID = 12608
+VSCODE_PID = 15680
 # environment
 USERDOMAIN_ROAMINGPROFILE = PC
 # variable set hash-table stats:
@@ -204,7 +204,7 @@ USERDOMAIN_ROAMINGPROFILE = PC
 
 # Directories
 
-# . (key c:/Users/youss/Bureau/info/raycaster2.0, mtime 1659733836): 10 files, no impossibilities.
+# . (key c:/Users/youss/Bureau/info/raycaster2.0, mtime 1659915906): 10 files, no impossibilities.
 
 # 10 files, no impossibilities in 1 directories.
 
@@ -219,7 +219,7 @@ link:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 10):
-	g++ raycasting_c++/main/main.o 		raycasting_c++/src/utilities.o 		raycasting_c++/src/raycaster.o 	-o raycasting_c++/executable/raycaster 		-LC:/Users/youss/Documents/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
+	g++ raycasting_c++/main/main.o 		raycasting_c++/src/tools.o 		raycasting_c++/src/raycaster.o 	-o raycasting_c++/executable/raycaster 		-LC:/Users/youss/Documents/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 all: compile link
 #  Command line target.
@@ -239,7 +239,7 @@ all: compile link
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-07 23:25:47
+#  Last modified 2022-08-08 00:51:59
 #  File has been updated.
 #  Successfully updated.
 
@@ -269,7 +269,7 @@ compile:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
 #  recipe to execute (from 'Makefile', line 4):
 	g++ -c raycasting_c++/main/main.cpp 	-o raycasting_c++/main/main.o 		-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
-	g++ -c raycasting_c++/src/utilities.cpp -o raycasting_c++/src/utilities.o 	-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
+	g++ -c raycasting_c++/src/tools.cpp 	-o raycasting_c++/src/tools.o 		-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
 	g++ -c raycasting_c++/src/Ray.cpp 		-o raycasting_c++/src/Ray.o 		-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
 	g++ -c raycasting_c++/src/raycaster.cpp -o raycasting_c++/src/raycaster.o 	-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
 
@@ -293,6 +293,6 @@ compile:
 # strcache performance: lookups = 25 / hit rate = 40%
 # hash-table stats:
 # Load=15/8192=0%, Rehash=0, Collisions=1/25=4%
-# Finished Make data base on Sun Aug 07 23:26:08 2022
+# Finished Make data base on Mon Aug 08 00:52:00 2022
 
  
