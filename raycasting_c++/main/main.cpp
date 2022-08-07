@@ -5,12 +5,16 @@
 #include<SFML/Graphics.hpp>
 
 #include"header_files/utilities.hpp"
-#include"header_files/player.hpp"
+#include"header_files/raycaster.hpp"
 
 const int cell_size=30;
 const int cell_number=20;
-const int width=cell_number*cell_size;
-const int  height=cell_number*cell_size;
+int width=cell_number*cell_size;
+int  height=cell_number*cell_size;
+int half_width=int(width/2);
+float fov=M_PI_2;
+int sc_dist=int(half_width/std::tan(fov/2));
+
 int rays=int(width/2);
 int** map=new int*[20];
 double* DeltaTime=new double;
@@ -44,7 +48,6 @@ int main(){
                 rect.setPosition(j*cell_size,i*cell_size);
                 rect.setFillColor(sf::Color(0,255,0));
                 tiles.push_back(rect);
-                rect_pos.push_back((i+j*cell_size));
             }
         }
     }
@@ -53,7 +56,7 @@ int main(){
     
     sf::Vector2f pos(260,260);
     float r=15.f;
-    Player player1(r,pos,M_PI_2,rays);
+    Player player1(r,pos,fov,rays,width,height);
 
     while(window.isOpen()){
         sf::Event ev;
@@ -73,11 +76,11 @@ int main(){
         std::vector<int>::iterator it;
         
         for (auto & rectangle : tiles){
-            window.draw(rectangle);
+            //window.draw(rectangle);
             if (rectangle.getPosition().x>=starting_cell_x*cell_size && rectangle.getPosition().x<=ending_cell_x*cell_size && rectangle.getPosition().y>=starting_cell_y*cell_size && rectangle.getPosition().y<=ending_cell_y*cell_size){
             cir_rect_collision(player1.shape,rectangle,r,cell_size,cell_size);
         }}
-        player1.update(window,DeltaTime,cell_size,map,rays);
+        player1.update(window,DeltaTime,cell_size,map,rays,sc_dist);
         window.display();
         print_fps(clock,DeltaTime);
     }

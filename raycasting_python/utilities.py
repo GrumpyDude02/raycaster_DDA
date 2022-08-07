@@ -1,4 +1,5 @@
 import pygame,math
+from settings import TEXTURE_SIZE
 
 
 def circle_circle_collision(circle1,circle2):
@@ -26,6 +27,8 @@ def circle_rect_collisions(circle,rect,circle_radius,rect_width,rect_height,appl
                 circle.x+=dir.x*overlap
                 circle.y+=dir.y*overlap
 
+def SAT_collision():
+    pass
 
 def clamp(minimum,maximum,val):
     val=max(minimum,min(val,maximum))
@@ -42,5 +45,11 @@ def mouse_control(player,borders,center,max_relativity,sensitivity,dt,offset):
     offset[0]-=rel_y*dt*sensitivity*240
 
 
-def SAT_collision():
-    pass
+def display_fps(clock,window,pos):     
+    font=pygame.font.Font(None,20)
+    fps=font.render("FPS:"+str(int(clock.get_fps())),True,(255,255,255))
+    rect=fps.get_rect()
+    rect.x=pos[0]
+    rect.y=pos[1]
+    pygame.draw.rect(window,(0,0,0),rect)
+    window.blit(fps,pos)

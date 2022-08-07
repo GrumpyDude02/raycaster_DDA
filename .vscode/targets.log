@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Aug 06 00:29:20 2022
+# Make data base, printed on Sun Aug 07 23:26:08 2022
 
 # Variables
 
@@ -47,6 +47,8 @@ PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
+# environment
 TMP = C:\Users\youss\AppData\Local\Temp
 # environment
 PROGRAMW6432 = C:\Program Files
@@ -61,7 +63,8 @@ PATH = C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Windows\system32
 # environment
 COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # environment
-ZES_ENABLE_SYSMAN = 1
+ZES_E 
+NABLE_SYSMAN = 1
 # environment
 PROCESSOR_ARCHITECTURE = AMD64
 # environment
@@ -77,7 +80,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7148_VZPVVYWIIMDIMXQR
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12608_JYVDMIGVIWGJXYUG
 # environment
 COMPUTERNAME = PC
 # environment
@@ -97,7 +100,7 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 VSCODE_CODE_CACHE_PATH = C:\Users\youss\AppData\Roaming\Code\CachedData\da76f93349a72022ca4670c1b84860304616aaa2
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 COMMONPROGRAMFILES = C:\Program Files\Common Files
 # environment
@@ -185,13 +188,15 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
 WSA_PACMAN_HOME = C:\Program Files\WSA PacMan
 # environment
-VSCODE_PID = 7148
+VSCODE_PID = 12608
 # environment
 USERDOMAIN_ROAMINGPROFILE = PC
 # variable set hash-table stats:
-# Load=90/1024=9%, Rehash=0, Collisions=16/114=14%
+# Load=92/1024=9%, Rehash=0, Collisions=16/116=14%
 
 # Pattern-specific Variable Values
 
@@ -214,7 +219,7 @@ link:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 10):
-	g++ raycasting_c++/main/main.o 		raycasting_c++/src/utilities.o 		raycasting_c++/src/player.o 	-o raycasting_c++/executable/raycaster 		-LC:/Users/youss/Documents/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
+	g++ raycasting_c++/main/main.o 		raycasting_c++/src/utilities.o 		raycasting_c++/src/raycaster.o 	-o raycasting_c++/executable/raycaster 		-LC:/Users/youss/Documents/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 all: compile link
 #  Command line target.
@@ -227,15 +232,14 @@ all: compile link
 
 # Not a target:
 .SUFFIXES:
-#  Implicit rule search has not bee 
-n done.
+#  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-03 14:21:18
+#  Last modified 2022-08-07 23:25:47
 #  File has been updated.
 #  Successfully updated.
 
@@ -267,7 +271,7 @@ compile:
 	g++ -c raycasting_c++/main/main.cpp 	-o raycasting_c++/main/main.o 		-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
 	g++ -c raycasting_c++/src/utilities.cpp -o raycasting_c++/src/utilities.o 	-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
 	g++ -c raycasting_c++/src/Ray.cpp 		-o raycasting_c++/src/Ray.o 		-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
-	g++ -c raycasting_c++/src/player.cpp 	-o raycasting_c++/src/player.o 		-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
+	g++ -c raycasting_c++/src/raycaster.cpp -o raycasting_c++/src/raycaster.o 	-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
 
 # Not a target:
 .DEFAULT:
@@ -289,6 +293,6 @@ compile:
 # strcache performance: lookups = 25 / hit rate = 40%
 # hash-table stats:
 # Load=15/8192=0%, Rehash=0, Collisions=1/25=4%
-# Finished Make data base on Sat Aug 06 00:29:20 2022
+# Finished Make data base on Sun Aug 07 23:26:08 2022
 
  

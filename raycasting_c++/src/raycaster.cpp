@@ -1,12 +1,14 @@
-
 #include<SFML/Graphics.hpp>
 #include<cmath>
-#include"header_files/player.hpp"
+#include<iostream>
+#include"header_files/raycaster.hpp"
 
-Player::Player(float r,sf::Vector2f position,float fov,int& casted_rays){
+Player::Player(float r,sf::Vector2f position,float fov,int& casted_rays,int sc_width,int height){
     *angle=M_PI;
+    width=sc_width;
     FOV=fov;
     start_angle=FOV/2-(*angle);
+    scale=int(width/casted_rays);
     pos=position;
     radius=r;
     shape.setRadius(radius);
@@ -15,11 +17,11 @@ Player::Player(float r,sf::Vector2f position,float fov,int& casted_rays){
     step=(FOV/casted_rays);
 }
 
-void Player::update(sf::RenderWindow& screen,double* dt,int cell_size,int** map,int& casted_rays){
+void Player::update(sf::RenderWindow& screen,double* dt,int cell_size,int** map,int& casted_rays,int sc_distance){
     start_angle=(*angle)-(FOV/2);
-        screen.draw(shape);
+    //screen.draw(shape);
 
-        for(int i=0;i<=casted_rays;i++){
+        for(int i=1;i<=casted_rays;i++){
             sf::Vector2f ray_start((pos.x+radius)/cell_size,(pos.y+radius)/cell_size);
             sf::Vector2f unit_step_size,Ray_length;
             int map_cell[]={int(ray_start.x),int(ray_start.y)};
@@ -56,24 +58,23 @@ void Player::update(sf::RenderWindow& screen,double* dt,int cell_size,int** map,
                     dist=Ray_length.y;
                     Ray_length.y+=unit_step_size.y;
                 }
-                if (dist>=10){
-                    dist=10;
-                    break;
-                }
-                else if(map_cell[0]>=0 && map_cell[0]<=19 && map_cell[1]>=0 && map_cell[1]<=19){
+                if(map_cell[0]>=0 && map_cell[0]<=19 && map_cell[1]>=0 && map_cell[1]<=19){
                     if(map[map_cell[1]][map_cell[0]]==1){
                         break;
                     }
                 }
             }
-            sf::Vertex line[]={
-                sf::Vector2f(pos.x+radius,pos.y+radius),
-                sf::Vector2f(pos.x+radius+cos_a*dist*cell_size,pos.y+radius+sin_a*dist*cell_size)
-                };
-            screen.draw(line,2,sf::Lines);
-            start_angle+=step;
+            int c;
+            sf::RectangleShape rect;
+            c=255/(1+dist*dist*0.09);
+            dist*=std::cos(start_angle-(*angle));
+            float projected_height=float(sc_distance)/(dist+0.0001);
+            rect.setSize(sf::Vector2f(float(scale),projected_height));
+            rect.setPosition(sf::Vector2f(float(i*scale),float(600/2)-projected_height/2));
+            rect.setFillColor(sf::Color(c,c,c));
+            screen.draw(rect);
+            start_angle=atan(((scale*i-float(width/2))/sc_distance))+(*angle);
         }
-
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
             *angle-=5*(*dt);
         }
