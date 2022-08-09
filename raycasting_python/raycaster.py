@@ -143,7 +143,6 @@ class raycaster():
         self.pos+=dir*dt*speed
         pygame.mouse.set_visible(visibility)
         if switch:
-            visibility=False
             mouse_control(self,BORDERS,center,50,0.35,dt,offset)
         if self.angle>=2*PI:
             self.angle=0.01

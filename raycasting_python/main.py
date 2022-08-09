@@ -82,7 +82,7 @@ while(1):
     if event.type==pygame.KEYDOWN:
         if event.key==pygame.K_ESCAPE:
             toggle=not toggle
-            visibility=True
+            visibility=not visibility
     dt=time.time()-previous_time
     if dt>=0.066:
         dt=0.066
@@ -92,7 +92,7 @@ while(1):
     floor=pygame.Rect(0,300+offset[0],1200,300-offset[0])
     pygame.draw.rect(main_surface,GREY,sky)
     pygame.draw.rect(main_surface,DARKER_GREY,floor)
-    camera.update(dt,toggle,offset,False)
+    camera.update(dt,toggle,offset,visibility)
     objects,ray_coordonates=camera.cast_rays(map,10)
     render_walls(objects)
     draw_minimap(map,camera,ray_coordonates)

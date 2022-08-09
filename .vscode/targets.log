@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Aug 08 00:52:00 2022
+# Make data base, printed on Tue Aug 09 15:12:43 2022
 
 # Variables
 
@@ -55,11 +55,12 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_CWD = C:\Users\youss\AppData\Local\Programs\Microsoft VS Code
+VSCODE_CWD = C:\Users\youss\Bureau
 # default
 MAKE_HOST := x86_64-w64-mingw32
 # environment
-PATH = C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Users\youss\AppData\Local\Programs\Python\Python310;C:\Users\youss\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\youss\AppData\Local\Microsoft\WindowsApps;C:\Users\youss\AppData\Local\Programs\Python\Python39\;C:\Users\youss\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\youss\AppData\Local\Programs\Microsoft VS Code\bin;C:\mingw64\bin;
+PATH = C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dot 
+net\;C:\Program Files\Git\cmd;C:\Users\youss\AppData\Local\Programs\Python\Python310;C:\Users\youss\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\youss\AppData\Local\Microsoft\WindowsApps;C:\Users\youss\AppData\Local\Programs\Python\Python39\;C:\Users\youss\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\youss\AppData\Local\Programs\Microsoft VS Code\bin;C:\mingw64\bin
 # environment
 COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # environment
@@ -79,7 +80,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_15680_HQUXRABLFQWEGGWM
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_8056_DBTWYJRJRMHXAPNX
 # environment
 COMPUTERNAME = PC
 # environment
@@ -99,7 +100,7 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 VSCODE_CODE_CACHE_PATH = C:\Users\youss\AppData\Roaming\Code\CachedData\da76f93349a72022ca4670c1b84860304616aaa2
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 COMMONPROGRAMFILES = C:\Program Files\Common Files
 # environment
@@ -127,7 +128,7 @@ PROGRAMFILES(X86) = C:\Program Files (x86)
 # environment
 LOCALAPPDATA = C:\Users\youss\AppData\Local
 # environment
-PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+PSMODULEPATH = %ProgramFiles%\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
 # default
 MAKE_COMMAND := make.exe
 # default
@@ -161,8 +162,7 @@ APPDATA = C:\Users\youss\AppData\Roaming
 # environment
 TEMP = C:\Users\youss\AppData\Local\Temp
 # environment
-COMSPEC =  
-C:\Windows\system32\cmd.exe
+COMSPEC = C:\Windows\system32\cmd.exe
 # default
 MAKEFILES := 
 # automatic
@@ -178,8 +178,6 @@ SUFFIXES :=
 # environment
 SYSTEMDRIVE = C:
 # environment
-SESSIONNAME = Console
-# environment
 PROCESSOR_REVISION = 7e05
 # default
 .RECIPEPREFIX := 
@@ -192,11 +190,11 @@ FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
 WSA_PACMAN_HOME = C:\Program Files\WSA PacMan
 # environment
-VSCODE_PID = 15680
+VSCODE_PID = 8056
 # environment
 USERDOMAIN_ROAMINGPROFILE = PC
 # variable set hash-table stats:
-# Load=92/1024=9%, Rehash=0, Collisions=16/116=14%
+# Load=91/1024=9%, Rehash=0, Collisions=16/115=14%
 
 # Pattern-specific Variable Values
 
@@ -204,9 +202,9 @@ USERDOMAIN_ROAMINGPROFILE = PC
 
 # Directories
 
-# . (key c:/Users/youss/Bureau/info/raycaster2.0, mtime 1659915906): 10 files, no impossibilities.
+# . (key c:/Users/youss/Bureau/info/raycaster2.0, mtime 1659989337): 11 files, no impossibilities.
 
-# 10 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -287,12 +285,12 @@ compile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 15 / storage = 120 B / avg = 8 B
-# current buf: size = 8162 B / used = 120 B / count = 15 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 16 / storage = 124 B / avg = 7 B
+# current buf: size = 8162 B / used = 124 B / count = 16 / avg = 7 B
 
-# strcache performance: lookups = 25 / hit rate = 40%
+# strcache performance: lookups = 26 / hit rate = 38%
 # hash-table stats:
-# Load=15/8192=0%, Rehash=0, Collisions=1/25=4%
-# Finished Make data base on Mon Aug 08 00:52:00 2022
+# Load=16/8192=0%, Rehash=0, Collisions=1/26=4%
+# Finished Make data base on Tue Aug 09 15:12:43 2022
 
  

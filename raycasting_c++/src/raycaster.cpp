@@ -3,11 +3,11 @@
 #include<iostream>
 #include"header_files/raycaster.hpp"
 
-Player::Player(float r,sf::Vector2f position,float fov,int& casted_rays,int sc_width,int height){
-    *angle=M_PI;
-    width=sc_width;
+Player::Player(float r,sf::Vector2f position,float fov,int& casted_rays,int width,int height){
+    angle=M_PI;
+    this->width=width;
     FOV=fov;
-    start_angle=FOV/2-(*angle);
+    start_angle=FOV/2-(angle);
     scale=int(width/casted_rays);
     pos=position;
     radius=r;
@@ -17,18 +17,20 @@ Player::Player(float r,sf::Vector2f position,float fov,int& casted_rays,int sc_w
     step=(FOV/casted_rays);
 }
 
-void Player::update(sf::RenderWindow& screen,double* dt,int cell_size,int** map,int& casted_rays,int sc_distance){
-    start_angle=(*angle)-(FOV/2);
+std::vector<std::vector<float>> Player::update(sf::RenderWindow& screen,double* dt,int cell_size,std::vector<std::vector<int>>& map,int& casted_rays,int& sc_distance){
+    start_angle=(angle)-(FOV/2);
     //screen.draw(shape);
-
+    std::vector<std::vector<float>> strips;
         for(int i=1;i<=casted_rays;i++){
             sf::Vector2f ray_start((pos.x+radius)/cell_size,(pos.y+radius)/cell_size);
             sf::Vector2f unit_step_size,Ray_length;
             int map_cell[]={int(ray_start.x),int(ray_start.y)};
+            bool horizontal;
             int dx,dy;
-            float dist;
+            float dist,displacement;
             float cos_a=std::cos(start_angle);
             float sin_a=std::sin(start_angle);
+            std::vector<float> data;
 
             if (cos_a<0){
                 dx=-1;
@@ -52,43 +54,46 @@ void Player::update(sf::RenderWindow& screen,double* dt,int cell_size,int** map,
                 if (Ray_length.x<Ray_length.y){
                     map_cell[0]+=dx;
                     dist=Ray_length.x;
+                    horizontal=true;
                     Ray_length.x+=unit_step_size.x;
                 }else{
                     map_cell[1]+=dy;
+                    horizontal=false;
                     dist=Ray_length.y;
                     Ray_length.y+=unit_step_size.y;
                 }
-                if(map_cell[0]>=0 && map_cell[0]<=19 && map_cell[1]>=0 && map_cell[1]<=19){
+                if(map_cell[0]>=0 && map_cell[0]<map[0].size() && map_cell[1]>=0 && map_cell[1]<map.size()){
                     if(map[map_cell[1]][map_cell[0]]==1){
+                        if(horizontal){
+                            displacement=fmod(ray_start.y+sin_a*dist,1);}
+                        else{
+                            displacement=fmod(ray_start.x+cos_a*dist,1);
+                        }
+                        data.push_back(displacement);
                         break;
                     }
                 }
             }
-            int c;
-            sf::RectangleShape rect;
-            c=255/(1+dist*dist*0.09);
-            dist*=std::cos(start_angle-(*angle));
+            dist*=std::cos(start_angle-(angle));
             float projected_height=float(sc_distance)/(dist+0.0001);
-            rect.setSize(sf::Vector2f(float(scale),projected_height));
-            rect.setPosition(sf::Vector2f(float(i*scale),float(600/2)-projected_height/2));
-            rect.setFillColor(sf::Color(c,c,c));
-            screen.draw(rect);
-            start_angle=atan(((scale*i-float(width/2))/sc_distance))+(*angle);
+            data.push_back(projected_height);
+            start_angle=atan(((scale*i-float(width/2))/sc_distance))+(angle);
+            strips.push_back(data);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-            *angle-=5*(*dt);
+            angle-=5*(*dt);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-            *angle+=5*(*dt);
+            angle+=5*(*dt);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
-            shape.move(std::cos(*angle)*50*(*dt),std::sin(*angle)*50*(*dt));
+            shape.move(std::cos(angle)*50*(*dt),std::sin(angle)*50*(*dt));
             pos=shape.getPosition();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
-            shape.move(-std::cos(*angle)*50*(*dt),-std::sin(*angle)*50*(*dt));
+            shape.move(-std::cos(angle)*50*(*dt),-std::sin(angle)*50*(*dt));
             pos=shape.getPosition();
             
         }
-
+        return strips;
     }

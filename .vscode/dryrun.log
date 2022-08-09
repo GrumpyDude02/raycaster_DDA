@@ -1,4 +1,4 @@
-make.exe --dry-run --keep-going --print-directory
+make.exe --dry-run --always-make --keep-going --print-directory
 make.exe: Entering directory 'c:/Users/youss/Bureau/info/raycaster2.0'
 g++ -c raycasting_c++/main/main.cpp 	-o raycasting_c++/main/main.o 		-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
 g++ -c raycasting_c++/src/tools.cpp 	-o raycasting_c++/src/tools.o 		-IC:/Users/youss/Documents/SFML-2.5.1/include 		-IC:/Users/youss/Bureau/info/raycaster2.0/raycasting_c++
