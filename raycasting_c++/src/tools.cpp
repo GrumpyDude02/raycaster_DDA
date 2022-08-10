@@ -64,8 +64,9 @@ void cir_rect_collision(sf::CircleShape& circle,sf::RectangleShape& rect,float c
         }
 }
 
-void draw_minimap(sf::RenderWindow& screen,std::vector<sf::RectangleShape>& tiles,std::vector<sf::RectangleShape>& small_tiles,Player& player,int scale,int radius,int cell_size){
+void draw_minimap(sf::RenderWindow& screen,std::vector<sf::RectangleShape>& tiles,std::vector<sf::RectangleShape>& small_tiles,Raycaster& player,sf::CircleShape& p_map_pos,int scale,int cell_size){
     sf::Vector2f position=player.shape.getPosition();
+    float radius=player.shape.getRadius();
 
     int position_cell_x=int((position.x+radius)/cell_size);
     int position_cell_y=int((position.y+radius)/cell_size);
@@ -84,6 +85,68 @@ void draw_minimap(sf::RenderWindow& screen,std::vector<sf::RectangleShape>& tile
         if (tiles[i].getPosition().x>=starting_cell_x*cell_size && tiles[i].getPosition().x<=ending_cell_x*cell_size && tiles[i].getPosition().y>=starting_cell_y*cell_size && tiles[i].getPosition().y<=ending_cell_y*cell_size){
             cir_rect_collision(player.shape,tiles[i],radius,cell_size,cell_size); 
     }
+    screen.draw(p_map_pos);
     screen.draw(small_tiles[i]);
-    
 }}
+
+int partition(std::vector<std::vector<float>> &values, int left, int right) {
+    int pivotIndex = left + (right - left) / 2;
+    float pivotValue = values[pivotIndex][2];
+    int i = left, j = right;
+    std::vector<float> temp;
+    while(i <= j) {
+        while(values[i][2] < pivotValue) {
+            i++;
+        }
+        while(values[j][2] > pivotValue) {
+            j--;
+        }
+        if(i <= j) {
+            temp = values[i];
+            values[i] = values[j];
+            values[j] = temp;
+            i++;
+            j--;
+        }
+    }
+    return i;
+}
+
+void quicksort(std::vector<std::vector<float>> &values, int left, int right) {
+    if(left < right) {
+        int pivotIndex = partition(values, left, right);
+        quicksort(values, left, pivotIndex - 1);
+        quicksort(values, pivotIndex, right);
+    }
+}
+
+int partition_sprite(std::vector<sf::Sprite> &values, int left, int right) {
+    int pivotIndex = left + (right - left) / 2;
+    float pivotValue = values[pivotIndex].getScale().y;
+    int i = left, j = right;
+    sf::Sprite temp;
+    while(i <= j) {
+        while(values[i].getScale().y < pivotValue) {
+            i++;
+        }
+        while(values[j].getScale().y > pivotValue) {
+            j--;
+        }
+        if(i <= j) {
+            temp = values[i];
+            values[i] = values[j];
+            values[j] = temp;
+            i++;
+            j--;
+        }
+    }
+    return i;
+}
+
+void quicksort_sprite(std::vector<sf::Sprite> &values, int left, int right) {
+    if(left < right) {
+        int pivotIndex = partition_sprite(values, left, right);
+        quicksort_sprite(values, left, pivotIndex - 1);
+        quicksort_sprite(values, pivotIndex, right);
+    }
+}

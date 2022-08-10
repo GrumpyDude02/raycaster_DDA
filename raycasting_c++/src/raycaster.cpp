@@ -3,7 +3,7 @@
 #include<iostream>
 #include"header_files/raycaster.hpp"
 
-Player::Player(float r,sf::Vector2f position,float fov,int& casted_rays,int width,int height){
+Raycaster::Raycaster(float r,sf::Vector2f position,float fov,int& casted_rays,int width,int height){
     angle=M_PI;
     this->width=width;
     FOV=fov;
@@ -17,16 +17,16 @@ Player::Player(float r,sf::Vector2f position,float fov,int& casted_rays,int widt
     step=(FOV/casted_rays);
 }
 
-std::vector<std::vector<float>> Player::update(sf::RenderWindow& screen,double* dt,int cell_size,std::vector<std::vector<int>>& map,int& casted_rays,int& sc_distance){
+std::vector<std::vector<float>> Raycaster::update(sf::RenderWindow& screen,double* dt,int cell_size,std::vector<std::vector<int>>& map,int& casted_rays,int& sc_distance){
     start_angle=(angle)-(FOV/2);
     //screen.draw(shape);
     std::vector<std::vector<float>> strips;
-        for(int i=1;i<=casted_rays;i++){
+        for(int i=1;i<=casted_rays+1;i++){
             sf::Vector2f ray_start((pos.x+radius)/cell_size,(pos.y+radius)/cell_size);
             sf::Vector2f unit_step_size,Ray_length;
             int map_cell[]={int(ray_start.x),int(ray_start.y)};
             bool horizontal;
-            int dx,dy;
+            int dx,dy,index;
             float dist,displacement;
             float cos_a=std::cos(start_angle);
             float sin_a=std::sin(start_angle);
@@ -63,13 +63,17 @@ std::vector<std::vector<float>> Player::update(sf::RenderWindow& screen,double* 
                     Ray_length.y+=unit_step_size.y;
                 }
                 if(map_cell[0]>=0 && map_cell[0]<map[0].size() && map_cell[1]>=0 && map_cell[1]<map.size()){
-                    if(map[map_cell[1]][map_cell[0]]==1){
+                    if(map[map_cell[1]][map_cell[0]]>0){
                         if(horizontal){
-                            displacement=fmod(ray_start.y+sin_a*dist,1);}
+                            if(cos_a>0){displacement=fmod(ray_start.y+sin_a*dist,1);}
+                            else{displacement=1-fmod(ray_start.y+sin_a*dist,1);}}
                         else{
-                            displacement=fmod(ray_start.x+cos_a*dist,1);
+                            if(sin_a>0){displacement=fmod(ray_start.x+cos_a*dist,1);}
+                            else{displacement=1-fmod(ray_start.x+cos_a*dist,1);}
                         }
+                        index=map[map_cell[1]][map_cell[0]];
                         data.push_back(displacement);
+                        data.push_back(float(index));
                         break;
                     }
                 }

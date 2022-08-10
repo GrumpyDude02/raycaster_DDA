@@ -2,6 +2,7 @@
 #include<vector>
 #include<cmath>
 #include<SFML/Graphics.hpp>
+#include<filesystem>
 
 #include"header_files/tools.hpp"
 #include"header_files/raycaster.hpp"
@@ -22,37 +23,56 @@ int rays=int(width/2);
 int scale=int(width/rays);
 double* DeltaTime=new double;
 
-std::vector<std::vector<int>> map{{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+std::vector<std::vector<int>> map   {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                     {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                                    {1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1},
                                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1},
                                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,1,0,0,0,0,3,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,1,0,0,0,0,4,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,1,0,0,0,0,5,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,1,0,0,0,0,6,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                    {1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,1},
                                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                                     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},};
 
 
+sf::Texture loadtexture(std::string index){
+    sf::Texture texture;
+    if(!texture.loadFromFile("..\\..\\textures\\"+index+".png"))
+        std::cout<<"Failed to load texture\n";
+    return texture;
+}
+
 int main(){
+
+    //LOADING TEXTURES
+    int files_num=0;
+    std::vector<sf::Texture> texture_list;
+    std::string path="..\\..\\textures";
+    for (const auto & entity:std::filesystem::directory_iterator(path)){
+        files_num++;
+    }
+    for(int i=1;i<=files_num;i++){
+        sf:: Texture texture;
+        texture=loadtexture(std::to_string(i));
+        texture_list.push_back(texture);
+    }
 
     //WINDOW INITIALISATION
     sf::RenderWindow window(sf::VideoMode(width,height),"test");
     //window.setFramerateLimit(60);
     sf::Clock clock;
     sf::Texture brick_wall;
-    if(!brick_wall.loadFromFile("..\\..\\textures\\1.png"))
-    std::cout<<"failed to load texture";
+    brick_wall=loadtexture("1");
 
     //VECTORS
     std::vector<sf::RectangleShape> tiles;
@@ -71,7 +91,11 @@ int main(){
     //CAMERA POSITION
     sf::Vector2f pos(260,260);
     float r=15.f;
-    Player player1(r,pos,fov,rays,width,height);
+    Raycaster camera(r,pos,fov,rays,width,height);
+    sf::CircleShape map_pos;
+    map_pos.setRadius(5.f);
+    map_pos.setFillColor(sf::Color(255,0,0));
+    int small_scale=10;
     
     //LOOP THROUGH THE MAP TO FIND WALLS
     for (int i=0;i<20;i++){
@@ -81,12 +105,11 @@ int main(){
                 sf::RectangleShape rect;
                 rect.setSize(sf::Vector2f(float(cell_size-1),float(cell_size-1)));
                 rect.setPosition(j*cell_size,i*cell_size);
-                rect.setFillColor(sf::Color(0,255,0));
                 tiles.push_back(rect);
 
                 sf::RectangleShape small_rect;
                 small_rect.setSize(sf::Vector2f(float(10-1),float(10-1)));
-                small_rect.setPosition(j*10,i*10);
+                small_rect.setPosition(j*small_scale,i*small_scale);
                 small_rect.setFillColor(sf::Color(255,255,255));
                 small_tiles.push_back(small_rect);
             }
@@ -96,6 +119,7 @@ int main(){
 
     //GAME LOOP
     while(window.isOpen()){
+        map_pos.setPosition((camera.shape.getPosition().x/cell_size)*10,(camera.shape.getPosition().y/cell_size)*10);
         sf::Event ev;
         while(window.pollEvent(ev)){
             if (ev.type==sf::Event::Closed)
@@ -103,20 +127,28 @@ int main(){
         window.clear();
         window.draw(sky);
         window.draw(bottom);
-        strip=player1.update(window,DeltaTime,cell_size,map,rays,sc_dist);
+        strip=camera.update(window,DeltaTime,cell_size,map,rays,sc_dist);
+        std::vector<sf::Sprite> sprites;
         for (int i=0;i<strip.size();i++){
             float offset=strip[i][0];
-            float proj_height=strip[i][1];
+            int index=strip[i][1];
+            float proj_height=strip[i][2];
             sf::Sprite sprite;
-            sprite.setTexture(brick_wall);
-            sprite.setTextureRect(sf::IntRect((offset)*(64-scale),0,float(scale),64));
-            sprite.scale(sf::Vector2f(4,(proj_height/64)));
+            sprite.setTexture(texture_list[index-1]);
+            //std::cout<<index<<"\n";
+            sprite.setTextureRect(sf::IntRect((offset)*(64-scale),0,(scale),64));
+            sprite.setScale(sf::Vector2f(scale,(proj_height/64)));
             sprite.setPosition(sf::Vector2f(i*scale,half_height-proj_height/2));
-            window.draw(sprite);
+            sprites.push_back(sprite);
         }
-        draw_minimap(window,tiles,small_tiles,player1,10,r,cell_size);
+        quicksort_sprite(sprites,0,sprites.size()-1);
+        for(auto &s :sprites){
+            window.draw(s);
+        }
+        draw_minimap(window,tiles,small_tiles,camera,map_pos,small_scale,cell_size);
         window.display();
         print_fps(clock,DeltaTime);
     }
     return 0;
+    system("pause");
 }
