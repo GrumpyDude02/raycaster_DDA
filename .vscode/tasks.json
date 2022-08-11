@@ -6,10 +6,16 @@
             "command": "C:\\mingw64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
+                "-O3",
+                "-std=c++17",
+                "${workspaceFolder}\\raycasting_c++\\main\\*.cpp",
+                "${workspaceFolder}\\raycasting_c++\\src\\*.cpp",
+                "-I${workspaceFolder}\\raycasting_c++",
+                "-IC:\\Users\\youss\\Documents\\SFML-2.5.1\\include",
+                "-LC:\\Users\\youss\\Documents\\SFML-2.5.1\\lib",
+                "-lsfml-graphics", "-lsfml-window", "-lsfml-system", "-lm",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${workspaceFolder}\\raycasting_c++\\executable\\raycaster.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"

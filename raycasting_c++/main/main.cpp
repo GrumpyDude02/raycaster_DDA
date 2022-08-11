@@ -15,7 +15,7 @@ int width=cell_number*cell_size*2;
 int  height=cell_number*cell_size;
 int half_height=int(height/2);
 int half_width=int(width/2);
-float fov=M_PI_2;
+float fov=1.570796f;
 int sc_dist=int(half_width/std::tan(fov/2));
 
 
@@ -128,22 +128,19 @@ int main(){
         window.draw(sky);
         window.draw(bottom);
         strip=camera.update(window,DeltaTime,cell_size,map,rays,sc_dist);
-        std::vector<sf::Sprite> sprites;
+        quicksort(strip,0,strip.size()-1);
         for (int i=0;i<strip.size();i++){
             float offset=strip[i][0];
             int index=strip[i][1];
             float proj_height=strip[i][2];
+            int x_pos=strip[i][3];
             sf::Sprite sprite;
             sprite.setTexture(texture_list[index-1]);
             //std::cout<<index<<"\n";
             sprite.setTextureRect(sf::IntRect((offset)*(64-scale),0,(scale),64));
             sprite.setScale(sf::Vector2f(scale,(proj_height/64)));
-            sprite.setPosition(sf::Vector2f(i*scale,half_height-proj_height/2));
-            sprites.push_back(sprite);
-        }
-        quicksort_sprite(sprites,0,sprites.size()-1);
-        for(auto &s :sprites){
-            window.draw(s);
+            sprite.setPosition(sf::Vector2f(x_pos*scale,half_height-proj_height/2));
+            window.draw(sprite);
         }
         draw_minimap(window,tiles,small_tiles,camera,map_pos,small_scale,cell_size);
         window.display();

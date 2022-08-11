@@ -4,7 +4,7 @@
 #include"header_files/raycaster.hpp"
 
 Raycaster::Raycaster(float r,sf::Vector2f position,float fov,int& casted_rays,int width,int height){
-    angle=M_PI;
+    angle=3.14159f;
     this->width=width;
     FOV=fov;
     start_angle=FOV/2-(angle);
@@ -21,7 +21,7 @@ std::vector<std::vector<float>> Raycaster::update(sf::RenderWindow& screen,doubl
     start_angle=(angle)-(FOV/2);
     //screen.draw(shape);
     std::vector<std::vector<float>> strips;
-        for(int i=1;i<=casted_rays+1;i++){
+        for(int i=0;i<=casted_rays+1;i++){
             sf::Vector2f ray_start((pos.x+radius)/cell_size,(pos.y+radius)/cell_size);
             sf::Vector2f unit_step_size,Ray_length;
             int map_cell[]={int(ray_start.x),int(ray_start.y)};
@@ -81,6 +81,7 @@ std::vector<std::vector<float>> Raycaster::update(sf::RenderWindow& screen,doubl
             dist*=std::cos(start_angle-(angle));
             float projected_height=float(sc_distance)/(dist+0.0001);
             data.push_back(projected_height);
+            data.push_back(i);
             start_angle=atan(((scale*i-float(width/2))/sc_distance))+(angle);
             strips.push_back(data);
         }

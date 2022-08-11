@@ -111,7 +111,6 @@ int partition(std::vector<std::vector<float>> &values, int left, int right) {
     }
     return i;
 }
-
 void quicksort(std::vector<std::vector<float>> &values, int left, int right) {
     if(left < right) {
         int pivotIndex = partition(values, left, right);
@@ -142,7 +141,6 @@ int partition_sprite(std::vector<sf::Sprite> &values, int left, int right) {
     }
     return i;
 }
-
 void quicksort_sprite(std::vector<sf::Sprite> &values, int left, int right) {
     if(left < right) {
         int pivotIndex = partition_sprite(values, left, right);
