@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Aug 11 21:08:29 2022
+# Make data base, printed on Fri Aug 26 23:23:55 2022
 
 # Variables
 
@@ -37,7 +37,8 @@ SHELL := sh.exe
 # environment
 WINDIR = C:\Windows
 # environment
-VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"c7e2ab29f04a1f7605fe59032ea1fa0d.fr","_translationsConfigFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\c7e2ab29f04a1f7605fe59032ea1fa0d.fr\\tcf.json","_cacheRoot":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\c7e2ab29f04a1f7605fe59032ea1fa0d.fr","_resolvedLanguagePackCoreLocation":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\c7e2ab29f04a1f7605fe59032ea1fa0d.fr\\6d9b74a70ca9c7733b29f0456fd8195364076dda","_corruptedFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\c7e2ab29f04a1f7605fe59032ea1fa0d.fr\\corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"c7e2ab29f04a1f7605fe59032ea1fa0d.fr","_translationsConfigFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\c7e2ab29f04a1f7605fe59032ea1fa0d.fr\\tcf.json","_cacheRoot":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\c7e2ab29f04a1f7605fe59032ea1fa0d.fr","_resolvedLanguagePackCoreLocation":"C:\\Users\\y 
+ouss\\AppData\\Roaming\\Code\\clp\\c7e2ab29f04a1f7605fe59032ea1fa0d.fr\\6d9b74a70ca9c7733b29f0456fd8195364076dda","_corruptedFile":"C:\\Users\\youss\\AppData\\Roaming\\Code\\clp\\c7e2ab29f04a1f7605fe59032ea1fa0d.fr\\corrupted.info","_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\youss\OneDrive\Documents\OneDrive
 # environment
@@ -47,15 +48,13 @@ PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
-FPS_BROWSER_USER_PROFILE_STRING = Default
-# environment
 TMP = C:\Users\youss\AppData\Local\Temp
 # environment
 PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_CWD = C:\Users\youss\Bureau
+VSCODE_CWD = C:\Users\youss\Bureau\projects\uneven terrain
 # default
 MAKE_HOST := x86_64-w64-mingw32
 # environment
@@ -79,7 +78,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_10888_UUCFOTEJKIMSHZDC
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_10264_OPTSWJTNQMRKNBVB
 # environment
 COMPUTERNAME = PC
 # environment
@@ -99,7 +98,7 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 VSCODE_CODE_CACHE_PATH = C:\Users\youss\AppData\Roaming\Code\CachedData\6d9b74a70ca9c7733b29f0456fd8195364076dda
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 COMMONPROGRAMFILES = C:\Program Files\Common Files
 # environment
@@ -124,6 +123,8 @@ MAKE_VERSION := 4.2.1
 PROGRAMFILES(X86) = C:\Program Files (x86)
 # automatic
 %D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
+# environment
+JD2_HOME = C:\Users\youss\AppData\Local\JDownloader 2.0
 # environment
 LOCALAPPDATA = C:\Users\youss\AppData\Local
 # environment
@@ -187,15 +188,13 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
-# environment
 WSA_PACMAN_HOME = C:\Program Files\WSA PacMan
 # environment
-VSCODE_PID = 10888
+VSCODE_PID = 10264
 # environment
 USERDOMAIN_ROAMINGPROFILE = PC
 # variable set hash-table stats:
-# Load=92/1024=9%, Rehash=0, Collisions=16/116=14%
+# Load=91/1024=9%, Rehash=0, Collisions=16/115=14%
 
 # Pattern-specific Variable Values
 
@@ -216,8 +215,7 @@ USERDOMAIN_ROAMINGPROFILE = PC
 link:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
-#  File has  
-not been updated.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 9):
 	g++ raycasting_c++/main/main.o	raycasting_c++/src/tools.o 	raycasting_c++/src/raycaster.o 	-o raycasting_c++/executable/raycaster	-LC:/Users/youss/Documents/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
 
@@ -292,6 +290,6 @@ compile:
 # strcache performance: lookups = 25 / hit rate = 40%
 # hash-table stats:
 # Load=15/8192=0%, Rehash=0, Collisions=1/25=4%
-# Finished Make data base on Thu Aug 11 21:08:29 2022
+# Finished Make data base on Fri Aug 26 23:23:55 2022
 
  

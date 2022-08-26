@@ -2,8 +2,6 @@
  
  the project is still not complete in neither languages.
  
- no texturing in c++,yet.
- 
  the gif is taken from python script.
  
  texture assets from Wolfenstein 3D
