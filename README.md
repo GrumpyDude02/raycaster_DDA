@@ -2,7 +2,7 @@
 
 
  
- The gif is taken from python script,excpect better performance with c++.
+ The gif is taken from python script,expect better performance with c++.
  
  texture assets from Wolfenstein 3D
  
