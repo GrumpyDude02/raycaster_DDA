@@ -1,8 +1,8 @@
 ﻿# raycaster_DDA
+
+
  
- the project is still not complete in neither languages.
- 
- the gif is taken from python script.
+ The gif is taken from python script,excpect better performance with c++.
  
  texture assets from Wolfenstein 3D
  
