@@ -1,34 +1,35 @@
 {
-    "tasks": [
-        {
-            "type": "cppbuild",
-            "label": "C/C++: g++.exe générer le fichier actif",
-            "command": "C:\\mingw64\\bin\\g++.exe",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-O3",
-                "-std=c++17",
-                "${workspaceFolder}\\raycasting_c++\\main\\*.cpp",
-                "${workspaceFolder}\\raycasting_c++\\src\\*.cpp",
-                "-I${workspaceFolder}\\raycasting_c++",
-                "-IC:\\Users\\youss\\Documents\\SFML-2.5.1\\include",
-                "-LC:\\Users\\youss\\Documents\\SFML-2.5.1\\lib",
-                "-lsfml-graphics", "-lsfml-window", "-lsfml-system", "-lm",
-                "-o",
-                "${workspaceFolder}\\raycasting_c++\\executable\\raycaster.exe"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "Tâche générée par le débogueur."
-        }
-    ],
-    "version": "2.0.0"
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++: g++.exe générer le fichier actif",
+      "command": "C:\\mingw64\\bin\\g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        "-std=c++17",
+        "${workspaceFolder}\\raycasting_c++\\src\\*.cpp",
+        "-I${workspaceFolder}\\raycasting_c++",
+        "-IC:\\Users\\youss\\Documents\\SFML-2.5.1\\include",
+        "-I${workspaceFolder}\\raycasting_c++\\",
+        "-LC:\\Users\\youss\\Documents\\SFML-2.5.1\\lib",
+        "-lsfml-graphics",
+        "-lsfml-window",
+        "-lsfml-system",
+        "-lm",
+        "-o",
+        "${workspaceFolder}\\raycasting_c++\\executable\\raycaster.exe"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Tâche générée par le débogueur."
+    }
+  ],
+  "version": "2.0.0"
 }

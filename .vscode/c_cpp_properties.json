@@ -3,13 +3,10 @@
     {
       "name": "windows-gcc-x64",
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}\\raycasting_c++",
+        "C:\\Users\\youss\\Documents\\SFML-2.5.1\\include"
       ],
-      "defines": [
-        "_DEBUG",
-        "UNICODE",
-        "_UNICODE"
-      ],
+      "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
       "compilerPath": "C:/mingw64/bin/gcc.exe",
       "cStandard": "${default}",
       "cppStandard": "${default}",
