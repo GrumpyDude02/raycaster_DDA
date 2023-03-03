@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
+
+#ifdef RAY_H
 #include <cmath>
-#include "header_files/Ray.hpp"
+#include "header_files/Ray.h"
 
 ray::ray(sf::Vector2f &direction, sf::Vector2f &starting_pos)
 {
@@ -69,3 +71,4 @@ float ray::cast_ray(int **map, float &radius, int &cell_size)
     }
     return dist;
 }
+#endif

@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
-#include "header_files/raycaster.hpp"
+#include "header_files/raycaster.h"
 
 Raycaster::Raycaster(float r, sf::Vector2f position, float fov, int &casted_rays, int width, int height)
     : angle(3.14159f),

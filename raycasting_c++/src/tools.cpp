@@ -1,8 +1,8 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include <cmath>
-#include <header_files/tools.hpp>
-#include <header_files/raycaster.hpp>
+#include <header_files/tools.h>
+#include <header_files/raycaster.h>
 
 bool collision(sf::CircleShape &circle, sf::RectangleShape &rect, float rect_width)
 {
@@ -92,10 +92,18 @@ void draw_minimap(sf::RenderWindow &screen, std::vector<sf::RectangleShape> &til
     }
 }
 
-void print_fps(sf::Clock &clock, double *dt)
+void print_fps(sf::Clock &clock, double *dt, sf::RenderWindow &window, sf::Font &DefaultFont)
 {
-    *dt = clock.restart().asSeconds();
-    // std::cout<<int(1.f/(*dt))<<std::endl;
+    static sf::RectangleShape bg;
+    bg.setSize(sf::Vector2f(40.0f, 20.0f));
+    bg.setPosition(sf::Vector2f(0, 0));
+    bg.setFillColor(sf::Color(255, 255, 255));
+    sf::Text FPS(std::to_string(int(1 / (*dt))), DefaultFont, 18);
+    FPS.setStyle(sf::Text::Bold);
+    FPS.setFillColor(sf::Color::Black);
+    FPS.setPosition(sf::Vector2f(0.0f, 0.0f));
+    window.draw(bg);
+    window.draw(FPS);
 }
 int partition(std::vector<std::vector<float>> &values, int left, int right)
 {

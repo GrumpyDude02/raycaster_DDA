@@ -4,8 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <filesystem>
 
-#include "header_files/tools.hpp"
-#include "header_files/raycaster.hpp"
+#include "header_files/tools.h"
+#include "header_files/raycaster.h"
 
 // GLOBALE VARIABLES
 const int cell_size = 30;
@@ -19,7 +19,6 @@ int sc_dist = int(half_width / std::tan(fov / 2));
 
 int rays = int(width / 2);
 int scale = int(width / rays);
-double *DeltaTime = new double;
 
 std::vector<std::vector<int>> map{
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -54,7 +53,9 @@ sf::Texture loadtexture(std::string index)
 
 int main()
 {
-
+    // time var
+    double *DeltaTime = new double;
+    double *acc = new double;
     // LOADING TEXTURES
     int files_num = 0;
     std::vector<sf::Texture> texture_list;
@@ -76,7 +77,8 @@ int main()
     sf::Clock clock;
     sf::Texture brick_wall;
     brick_wall = loadtexture("1");
-
+    sf::Font Font;
+    Font.loadFromFile("..\\..\\textures\\arial.ttf");
     // VECTORS
     std::vector<sf::RectangleShape> tiles;
     std::vector<sf::RectangleShape> small_tiles;
@@ -120,7 +122,7 @@ int main()
             }
         }
     }
-
+    double temp = 0.01;
     // GAME LOOP
     while (window.isOpen())
     {
@@ -131,11 +133,13 @@ int main()
             if (ev.type == sf::Event::Closed)
                 window.close();
         }
+        *DeltaTime = clock.restart().asSeconds();
+        (*acc) = (*acc) + (*DeltaTime) * 1000;
         window.clear();
         window.draw(sky);
         window.draw(bottom);
         strip = camera.update(window, DeltaTime, cell_size, map, rays, sc_dist);
-        std::sort(strip.begin(), strip.end());
+        quicksort(strip, 0, strip.size() - 1);
         for (int i = 0; i < strip.size(); i++)
         {
             float offset = strip[i][0];
@@ -151,9 +155,14 @@ int main()
             window.draw(sprite);
         }
         draw_minimap(window, tiles, small_tiles, camera, map_pos, small_scale, cell_size);
+        if ((*acc) >= 250)
+        {
+            temp = (*DeltaTime);
+            *acc = 0;
+        }
+        print_fps(clock, &temp, window, Font);
         window.display();
-        print_fps(clock, DeltaTime);
     }
+    delete DeltaTime;
     return 0;
-    system("pause");
 }
