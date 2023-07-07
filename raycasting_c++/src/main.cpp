@@ -4,8 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <filesystem>
 
-#include "header_files/tools.h"
-#include "header_files/raycaster.h"
+#include "tools.h"
+#include "raycaster.h"
 
 // GLOBALE VARIABLES
 const int cell_size = 30;

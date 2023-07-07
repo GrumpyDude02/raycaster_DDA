@@ -1,8 +1,9 @@
 #include <SFML/Graphics.hpp>
 
 #ifdef RAY_H
+#define RAY_H
 #include <cmath>
-#include "header_files/Ray.h"
+#include "ray.h"
 
 ray::ray(sf::Vector2f &direction, sf::Vector2f &starting_pos)
 {

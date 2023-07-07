@@ -1,8 +1,8 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include <cmath>
-#include <header_files/tools.h>
-#include <header_files/raycaster.h>
+#include <tools.h>
+#include <raycaster.h>
 
 bool collision(sf::CircleShape &circle, sf::RectangleShape &rect, float rect_width)
 {
