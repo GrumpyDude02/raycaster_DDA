@@ -139,7 +139,7 @@ int main()
         window.draw(sky);
         window.draw(bottom);
         strip = camera.update(window, DeltaTime, cell_size, map, rays, sc_dist);
-        quicksort(strip, 0, strip.size() - 1);
+        // quicksort(strip, 0, strip.size() - 1);
         for (int i = 0; i < strip.size(); i++)
         {
             float offset = strip[i][0];
