@@ -64,7 +64,7 @@ int main()
     {
         files_num++;
     }
-    for (int i = 1; i <= files_num; i++)
+    for (int i = 1; i < files_num; i++)
     {
         sf::Texture texture;
         texture = loadtexture(std::to_string(i));
@@ -140,18 +140,30 @@ int main()
         window.draw(bottom);
         strip = camera.update(window, DeltaTime, cell_size, map, rays, sc_dist);
         // quicksort(strip, 0, strip.size() - 1);
-        for (int i = 0; i < strip.size(); i++)
+        int i = 0, j = strip.size() - 1;
+        while (i < j)
         {
-            float offset = strip[i][0];
-            int index = strip[i][1];
-            float proj_height = strip[i][2];
-            int x_pos = strip[i][3];
+            float offset = strip[j][0];
+            int index = strip[j][1];
+            float proj_height = strip[j][2];
+            int x_pos = strip[j--][3];
             sf::Sprite sprite;
             sprite.setTexture(texture_list[index - 1]);
             // std::cout<<index<<"\n";
             sprite.setTextureRect(sf::IntRect((offset) * (64 - scale), 0, (scale), 64));
             sprite.setScale(sf::Vector2f(scale, (proj_height / 64)));
-            sprite.setPosition(sf::Vector2f(x_pos * scale, half_height - proj_height / 2));
+            sprite.setPosition(sf::Vector2f(j * scale, half_height - proj_height / 2));
+            window.draw(sprite);
+
+            offset = strip[i][0];
+            index = strip[i][1];
+            proj_height = strip[i][2];
+            x_pos = strip[i++][3];
+            sprite.setTexture(texture_list[index - 1]);
+            // std::cout<<index<<"\n";
+            sprite.setTextureRect(sf::IntRect((offset) * (64 - scale), 0, (scale), 64));
+            sprite.setScale(sf::Vector2f(scale, (proj_height / 64)));
+            sprite.setPosition(sf::Vector2f(i * scale, half_height - proj_height / 2));
             window.draw(sprite);
         }
         draw_minimap(window, tiles, small_tiles, camera, map_pos, small_scale, cell_size);
